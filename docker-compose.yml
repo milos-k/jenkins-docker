@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+    jenkins:
+      image: 'jenkins/jenkins'
+      restart: always
+      ports:
+        - '9090:8080' 
+        - '50000:50000'
+      volumes:
+        - '$JENKINS_HOME:/var/jenkins_home'
+        
+    gitlab:
+      image: 'gitlab/gitlab-ee:latest'
+      restart: always
+      ports:
+        - '80:80'
+        - '443:443'
+        - '22:22'
+      volumes:
+        - '$GITLAB_HOME/config:/etc/gitlab'
+        - '$GITLAB_HOME/logs:/var/log/gitlab'
+        - '$GITLAB_HOME/data:/var/opt/gitlab'
